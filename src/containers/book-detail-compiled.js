@@ -12,10 +12,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _index = require('../actions/index');
-
-var _redux = require('redux');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24,63 +20,59 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BookList = function (_Component) {
-    _inherits(BookList, _Component);
+var BookDetail = function (_Component) {
+    _inherits(BookDetail, _Component);
 
-    function BookList() {
-        _classCallCheck(this, BookList);
+    function BookDetail() {
+        _classCallCheck(this, BookDetail);
 
-        return _possibleConstructorReturn(this, (BookList.__proto__ || Object.getPrototypeOf(BookList)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (BookDetail.__proto__ || Object.getPrototypeOf(BookDetail)).apply(this, arguments));
     }
 
-    _createClass(BookList, [{
-        key: 'renderList',
-        value: function renderList() {
-            var _this2 = this;
-
-            return this.props.books.map(function (book) {
-                return _react2.default.createElement(
-                    'li',
-                    {
-                        key: book.title,
-                        onClick: function onClick() {
-                            return _this2.props.selectBook(book);
-                        },
-                        className: 'list-group-item' },
-                    book.title
-                );
-            });
-        }
-    }, {
+    _createClass(BookDetail, [{
         key: 'render',
         value: function render() {
+            if (!this.props.book) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    'Select a book to get started.'
+                );
+            }
+
             return _react2.default.createElement(
-                'ul',
-                { className: 'list-group col-sm-4' },
-                this.renderList()
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Details for:'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    'Title: ',
+                    this.props.book.title
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    'Pages: ',
+                    this.props.book.pages
+                )
             );
         }
     }]);
 
-    return BookList;
+    return BookDetail;
 }(_react.Component);
 
 function mapStateToProps(state) {
-    // Whatever is returned will show up as props inside of BookList
     return {
-        books: state.books
+        book: state.activeBook
     };
 }
 
-// Anything returned from this function will end up as props on the BookList container
-function mapDispatchToProps(dispatch) {
-    // Whenever selectBook is called, the result should be passed to all of our reducers
-    return (0, _redux.bindActionCreators)({ selectBook: _index.selectBook }, dispatch);
-}
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(BookDetail);
 
-// Promote BookList from a component to a container
-// - it needs to know about this new dispatch method, selectBook.
-// Make it available as a prop.
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BookList);
-
-//# sourceMappingURL=book-list-compiled.js.map
+//# sourceMappingURL=book-detail-compiled.js.map

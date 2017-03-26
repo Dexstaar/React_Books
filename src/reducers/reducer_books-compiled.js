@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-    return [{ title: 'Javascript: The Good Parts' }, { title: 'Harry Potter' }, { title: 'The Dark Tower' }, { title: 'Eloquent Ruby' }];
+    return [{ title: 'Javascript: The Good Parts', pages: 101 }, { title: 'Harry Potter', pages: 39 }, { title: 'The Dark Tower', pages: 85 }, { title: 'Eloquent Ruby', pages: 1 }];
 };
 
 //# sourceMappingURL=reducer_books-compiled.js.map
